@@ -67,7 +67,6 @@ fun BookItem(book: Book, isLibrary: Boolean, onDelete: () -> Unit, onClick: () -
                 }
             }
             if (isLibrary) {
-                // Reemplazamos el IconButton y el Icon por un TextButton simple y a prueba de errores
                 TextButton(onClick = onDelete) {
                     Text("Eliminar", color = MaterialTheme.colorScheme.error)
                 }

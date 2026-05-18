@@ -27,7 +27,6 @@ data class BookDto(
     @SerializedName("rating")
     val rating: Double,
 
-    // Soporte para múltiples llaves en caso el backend cambie el nombre de la variable de la imagen
     @SerializedName("coverUrl", alternate = ["image", "imageUrl", "cover"])
     val image: String?
 )

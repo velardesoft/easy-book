@@ -45,7 +45,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepository(api: BookService, dao: BookDao): BookRepository {
-        // Enlaza la interfaz de dominio con la implementación de datos
         return BookRepositoryImpl(api, dao)
     }
 }
