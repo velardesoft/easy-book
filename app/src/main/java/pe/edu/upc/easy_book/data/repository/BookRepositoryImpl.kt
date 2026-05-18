@@ -1,20 +1,21 @@
 package pe.edu.upc.easy_book.data.repository
 
-import android.icu.text.SimpleDateFormat
-import androidx.compose.ui.text.intl.Locale
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pe.edu.upc.easy_book.data.local.BookDao
 import pe.edu.upc.easy_book.data.local.BookEntity
 import pe.edu.upc.easy_book.data.remote.BookService
 import pe.edu.upc.easy_book.domain.Book
+import pe.edu.upc.easy_book.domain.BookRepository
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(
     private val api: BookService,
     private val dao: BookDao
-) {
+) : BookRepository {
 
     override suspend fun getCatalog(): List<Book> {
         val response = api.getBooks()
@@ -45,7 +46,7 @@ class BookRepositoryImpl @Inject constructor(
         } else {
             val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             val entity = BookEntity(book.id, book.title, book.author, book.publishedYear, book.editorial, book.genre, book.synopsis, book.rating, book.image, date)
-            dao.insert(entity) // Almacena localmente en Room [cite: 426]
+            dao.insert(entity)
         }
     }
 

@@ -15,10 +15,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
@@ -32,7 +32,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(app: Application): AppDatabase = Room.databaseBuilder(app, AppDatabase::class.java, "bookapp.db").build()
+    fun provideDatabase(app: Application): AppDatabase = Room.databaseBuilder(
+        app,
+        AppDatabase::class.java,
+        "bookapp.db"
+    ).build()
 
     @Provides
     @Singleton
@@ -40,5 +44,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(api: BookService, dao: BookDao): BookRepository = BookRepositoryImpl(api, dao)
+    fun provideRepository(api: BookService, dao: BookDao): BookRepository {
+        // Enlaza la interfaz de dominio con la implementación de datos
+        return BookRepositoryImpl(api, dao)
+    }
 }
