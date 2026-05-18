@@ -1,10 +1,8 @@
-package pe.edu.upc.easy_book.domain;
+package pe.edu.upc.easy_book.domain
 
-import java.util.List;
+import kotlinx.coroutines.flow.Flow
 
-import kotlinx.coroutines.flow.Flow;
-
-public interface BookRepository {
+interface BookRepository {
     suspend fun getCatalog(): List<Book>
     fun getLibrary(): Flow<List<Book>>
     suspend fun getBookById(id: Int): Book

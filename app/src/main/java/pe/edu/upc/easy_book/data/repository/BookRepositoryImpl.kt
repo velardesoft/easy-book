@@ -1,13 +1,11 @@
 package pe.edu.upc.easy_book.data.repository
 
-import pe.edu.upc.easy_book.data.remote.BookService
-import pe.edu.upc.easy_book.domain.BookRepository
 import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(
     private val api: BookService,
     private val dao: BookDao
-) : BookRepository {
+) {
 
     override suspend fun getCatalog(): List<Book> {
         val response = api.getBooks()

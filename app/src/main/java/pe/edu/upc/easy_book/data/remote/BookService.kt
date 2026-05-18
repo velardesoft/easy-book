@@ -1,8 +1,10 @@
-package pe.edu.upc.easy_book.data.remote;
+package pe.edu.upc.easy_book.data.remote
 
-import retrofit2.http.GET;
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-public interface BookService {
+interface BookService {
     @GET("books")
     suspend fun getBooks(): Response<List<BookDto>>
 
