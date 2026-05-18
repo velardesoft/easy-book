@@ -12,18 +12,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -45,7 +44,7 @@ fun HomeView(viewModel: HomeViewModel, navController: NavController) {
         LazyColumn(modifier = Modifier.padding(16.dp)) {
             val list = if (tabIndex == 0) catalog else library
             items(list) { book ->
-                BookItem(book, isLibrary = tabIndex == 1, onDelete = { viewModel.removeBook(book.id) }) {
+                BookItem(book = book, isLibrary = tabIndex == 1, onDelete = { viewModel.removeBook(book.id) }) {
                     navController.navigate("detail/${book.id}")
                 }
             }
@@ -63,11 +62,14 @@ fun BookItem(book: Book, isLibrary: Boolean, onDelete: () -> Unit, onClick: () -
                 Text(book.title, style = MaterialTheme.typography.titleMedium)
                 Text(book.author, style = MaterialTheme.typography.bodyMedium)
                 Text("Año: ${book.publishedYear}", style = MaterialTheme.typography.bodySmall)
-                if (isLibrary) Text("Leído: ${book.readDate}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                if (isLibrary) {
+                    Text("Leído: ${book.readDate}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+                }
             }
             if (isLibrary) {
-                IconButton(onClick = onDelete) {
-                    Icon(Icons.Default.Delete, contentDescription = "Eliminar", tint = MaterialTheme.colorScheme.error)
+                // Reemplazamos el IconButton y el Icon por un TextButton simple y a prueba de errores
+                TextButton(onClick = onDelete) {
+                    Text("Eliminar", color = MaterialTheme.colorScheme.error)
                 }
             }
         }

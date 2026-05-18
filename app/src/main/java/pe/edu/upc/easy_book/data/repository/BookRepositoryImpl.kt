@@ -43,7 +43,6 @@ class BookRepositoryImpl @Inject constructor(
         if (book.isRead) {
             dao.delete(book.id)
         } else {
-            // Genera la fecha automáticamente [cite: 420]
             val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             val entity = BookEntity(book.id, book.title, book.author, book.publishedYear, book.editorial, book.genre, book.synopsis, book.rating, book.image, date)
             dao.insert(entity) // Almacena localmente en Room [cite: 426]
