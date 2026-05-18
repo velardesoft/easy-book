@@ -1,6 +1,13 @@
 package pe.edu.upc.easy_book.Presentation.detail
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import pe.edu.upc.easy_book.domain.Book
+import pe.edu.upc.easy_book.domain.BookRepository
 import javax.inject.Inject
 
 @HiltViewModel
